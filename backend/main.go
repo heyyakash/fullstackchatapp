@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -16,7 +17,10 @@ func main() {
 }
 
 func setupAPI() {
+	m := NewManager()
 	r := mux.NewRouter()
 	r.HandleFunc("/", test).Methods("GET")
+	r.HandleFunc("/ws/chat", m.websocketServer)
+	fmt.Println("Server Listening at 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
