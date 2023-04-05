@@ -2,10 +2,48 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
+import { useEffect, useState } from 'react'
 
 // const inter = Inter({ subsets: ['latin'] })
 
+type request =  {
+  data:string,
+  type:string
+}
+
 export default function Home() {
+  const [conn,setConn] = useState<any>({})
+
+  const sendMessage = () => {
+    const test:request = {
+      data: "this is a test message",
+      type: "new_message"
+    }
+    // console.log(conn)
+    conn.send(JSON.stringify(test))
+  }
+
+  const onMessage = (e:any) => {
+    console.log(e)
+  }
+
+  const setupWS = () => {
+    const conn = new WebSocket("ws://localhost:8080/ws/chat")
+    conn.onopen = () => {
+      setConn(conn)
+      console.log("Connection Established")
+    }
+    conn.onerror = () => {
+      console.log("Error Occuered")
+    }
+    
+    conn.onmessage = onMessage
+    
+  } 
+
+  useEffect(()=>{
+    setupWS()
+  },[])
   return (
     <>
       <Head>
@@ -15,7 +53,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        Waddup
+        <button onClick={()=>sendMessage()}>test</button>
       </main>
          </>
   )
