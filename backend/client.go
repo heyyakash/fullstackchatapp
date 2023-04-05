@@ -37,6 +37,11 @@ func (c *Client) readMessage() {
 
 		log.Println(messageType)
 		log.Println(string(p))
+
+		if err := c.connection.WriteMessage(1, []byte("Message Received")); err != nil {
+			log.Println(err.Error())
+			break
+		}
 	}
 
 }
