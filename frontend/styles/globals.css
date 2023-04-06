@@ -23,4 +23,8 @@
   .button{
     @apply trans cursor-pointer
   }
+
+  .dark-back{
+    @apply backdrop-blur-md bg-black/80 overflow-hidden h-full rounded-xl border-[3px] border-dashed border-white/20;
+  }
 }
