@@ -6,25 +6,37 @@ import { useEffect, useState } from 'react'
 
 // const inter = Inter({ subsets: ['latin'] })
 
-type request =  {
-  data:string,
-  type:string
+type SendMessage =  {
+  type :string,
+  payload : {
+    username :string,
+    roomname :string,
+    message :string
+  }
 }
 
 export default function Home() {
   const [conn,setConn] = useState<any>({})
 
   const sendMessage = () => {
-    const test:request = {
-      data: "this is a test message",
-      type: "new_message"
+    const test:SendMessage = {
+      type:"send_message",
+      payload:{
+        username:"heyyitsakash",
+        roomname:"newroom",
+        message:"Hello! This is a test message"
+      }
     }
     // console.log(conn)
     conn.send(JSON.stringify(test))
   }
 
+  const onClose = (e:any) => {
+    console.log("Connection closed")
+  }
+
   const onMessage = (e:any) => {
-    console.log(e)
+    console.log(JSON.parse(e.data))
   }
 
   const setupWS = () => {
@@ -36,6 +48,8 @@ export default function Home() {
     conn.onerror = () => {
       console.log("Error Occuered")
     }
+
+    conn.onclose = onClose
     
     conn.onmessage = onMessage
     

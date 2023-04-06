@@ -9,7 +9,26 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        FiraSans:["Fira Sans"]
+      },
+      animation: {
+        text: 'text 5s ease infinite',
+      },
+      keyframes: {
+        text: {
+          '0%, 100%': {
+            'background-size': '300% 300%',
+            'background-position': 'left center',
+          },
+          '50%': {
+            'background-size': '300% 300%',
+            'background-position': 'right center',
+          },
+        },
+      },
+    },
   },
   plugins: [],
 }
