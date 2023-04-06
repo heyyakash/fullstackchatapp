@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"sync"
 
 	"github.com/gorilla/websocket"
 )
@@ -17,6 +18,7 @@ var (
 
 type Manager struct {
 	clients ClientList
+	sync.RWMutex
 }
 
 func NewManager() *Manager {
@@ -32,8 +34,25 @@ func (m *Manager) websocketServer(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println("New Connection Added")
 	c := NewClient(conn, m)
+	m.addClient(c)
+	log.Println(len(m.clients))
 
 	go c.readMessage()
+	go c.WriteMessage()
+}
+
+func (m *Manager) addClient(c *Client) {
+	m.Lock()
+	defer m.Unlock()
+
+	m.clients[c] = true
+}
+
+func (m *Manager) deleteClient(c *Client) {
+	m.Lock()
+	defer m.Unlock()
+
+	delete(m.clients, c)
 }
 
 func CheckOrigin(r *http.Request) bool {
