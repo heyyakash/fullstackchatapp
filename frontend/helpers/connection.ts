@@ -6,9 +6,7 @@ export const onError = () => {
     console.log("Error Occured")
 }
 
-export const onMessage = (e:any) => {
-    console.log(e)
-}
+
 
 export const onClose = () => {
     console.log("Connection Closed")
@@ -21,6 +19,6 @@ export const setupConnection = () => {
     conn.onopen = onOpen
     conn.onerror = onError
     conn.onclose = onClose
-    conn.onmessage = onMessage
+    // conn.onmessage = onMessage
     return conn
 }
