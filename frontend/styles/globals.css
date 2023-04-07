@@ -9,7 +9,7 @@
     @apply box-border m-0 p-0;
   }
   body{
-    @apply bg-[#a020f0] dark:bg-black w-[100%] h-[100vh] font-FiraSans bg-[url('/pattern.png')] bg-no-repeat bg-cover;
+    @apply bg-[#a020f0] dark:bg-black w-[100%] h-[100vh] font-FiraSans bg-no-repeat bg-cover;
   }
 }
 
@@ -26,5 +26,9 @@
 
   .dark-back{
     @apply backdrop-blur-md bg-black/80 overflow-hidden h-full rounded-xl border-[3px] border-dashed border-white/20;
+  }
+
+  .border-dash{
+    @apply border-dashed border-white/20
   }
 }
