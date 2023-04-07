@@ -11,6 +11,7 @@ type Client struct {
 	connection *websocket.Conn
 	manager    *Manager
 	room       string
+	username   string
 	channel    chan Event
 }
 
@@ -48,6 +49,7 @@ func (c *Client) readMessage() {
 
 		if req.Type == EventChangeRoom {
 			c.room = req.Payload.Roomname
+			c.username = req.Payload.Username
 		}
 
 		// if err := c.connection.WriteMessage(1, []byte("Message Received")); err != nil {
@@ -81,6 +83,13 @@ func (c *Client) WriteMessage() {
 				return
 			}
 			event := Event{Type: "new_message", Payload: evnt.Payload}
+			var guestList []string
+			for guest := range c.manager.clients {
+				if guest.room == c.room {
+					guestList = append(guestList, guest.username)
+				}
+			}
+			event.Payload.List = guestList
 
 			data, err := json.Marshal(event)
 			if err != nil {

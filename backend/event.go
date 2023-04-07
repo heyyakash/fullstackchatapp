@@ -1,9 +1,10 @@
 package main
 
 type Payload struct {
-	Username string `json:"username"`
-	Roomname string `json:"roomname"`
-	Message  string `json:"message"`
+	Username string   `json:"username"`
+	Roomname string   `json:"roomname"`
+	Message  string   `json:"message"`
+	List     []string `json:"clientlist"`
 }
 
 type Event struct {
