@@ -56,7 +56,9 @@ func (c *Client) readMessage() {
 		// }
 
 		for wsclients := range c.manager.clients {
-			wsclients.channel <- req
+			if wsclients.room == c.room {
+				wsclients.channel <- req
+			}
 		}
 
 	}
@@ -79,7 +81,7 @@ func (c *Client) WriteMessage() {
 				return
 			}
 			event := Event{Type: "new_message", Payload: evnt.Payload}
-			log.Println(event)
+
 			data, err := json.Marshal(event)
 			if err != nil {
 				log.Print("error : ", err.Error())
