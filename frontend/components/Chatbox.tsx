@@ -1,11 +1,15 @@
 import React from 'react'
+import NameBox from './NameBox'
 
 const Chatbox = ({username,message,direction}:{username:string,message:string,direction:string}) => {
   return (
-    <div className={`max-w-[50%] mt-2 clear-both float-right w-auto h-[50px] bg-white/20 text-white overflow-hidden flex items-center ${direction==="right"?"flex-row-reverse":""} rounded-xl`}>
-    <div className='px-2 text-black h-full flex items-center bg-white'>{username}</div>
-    <p className='px-2'>{message}</p>
-</div>
+    <div className={`flex float-${direction} ${direction==="right"?"":"flex-row-reverse"} gap-4 clear-both my-2 dark:text-white`}>
+      <div className={`flex flex-col ${direction==="right"?"items-end":"items-start"} gap-2`}>
+        <p className="text-xl font-semibold">{username}</p>
+        <div className={`${direction==="right"?"bg-blue-500":"bg-white/20"} text-xl font-semibold rounded-b-xl ${direction==="right"?"rounded-l-xl":"rounded-r-xl"} px-4 py-2`}>{message}</div>
+      </div>
+      <NameBox size= "big" name = {username.charAt(0)} />
+    </div>
   )
 }
 

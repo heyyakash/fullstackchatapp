@@ -11,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        FiraSans:["Fira Sans"]
+        FiraSans:["Fira Sans"],
+        PT:["PT Sans"]
       },
       animation: {
         text: 'text 5s ease infinite',
