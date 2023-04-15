@@ -65,7 +65,7 @@ const Body = () => {
                 {messageList.map((x)=>{
                     return(
                         <Chatbox key= {x.payload.message} username={x.payload.username} message={x.payload.message} direction={username===x.payload.username?"right":"left"} />
-                    )
+                    ) 
                 })}
             </div>
 

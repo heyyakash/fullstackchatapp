@@ -33,26 +33,6 @@ const Room = () => {
     const [c,setC] = useAtom(connAtom)
     const [message, setMessage] = useState<string>("")
 
-    const sendEvent = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        if (message.length !== 0) {
-            const payload: SendMessage = {
-                type: "send_message",
-                payload: {
-                    username,
-                    message,
-                    roomname
-                }
-            }
-            if (conn.current !== null) {
-                conn.current.send(JSON.stringify(payload))
-            }
-            setMessage("")
-
-        }
-
-        return false
-    }
 
     const handleIncommingMessage = (e: any) => {
         var arr = [...messageList]
@@ -83,7 +63,7 @@ const Room = () => {
 
     useEffect(() => {
         console.log("I ran again")
-        conn.current = new WebSocket("ws://localhost:8080/ws/chat")
+        conn.current = new WebSocket(process.env.NEXT_PUBLIC_HOST as string)
         setC(conn.current)
         conn.current.onopen = onOpen
         conn.current.onclose = onClose
