@@ -4,7 +4,7 @@ import { HiOutlineUserCircle } from 'react-icons/hi'
 
 const Userbox = ({ username }: { username: string }) => {
     return (
-        <div className='h-[70px] px-4 gap-3  bg-white/20  dark:text-white flex items-center'>
+        <div className='h-[70px] px-4 gap-3  bg-white/20  text-white flex items-center'>
             <HiOutlineUserCircle className='text-4xl' />
             <div className='flex flex-col'>
                 <p className='text-lg'>{username}</p>

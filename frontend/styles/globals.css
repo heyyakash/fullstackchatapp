@@ -9,8 +9,9 @@
   *{
     @apply box-border m-0 p-0;
   }
+
   body{
-    @apply bg-[#a020f0] dark:bg-[#181820] w-[100%] h-[100vh] font-PT bg-no-repeat bg-cover;
+    @apply bg-[#a020f0] bg-[#181820] w-[100%] h-[100vh] font-PT bg-no-repeat bg-cover;
   }
 }
 
@@ -22,7 +23,7 @@
     @apply bg-gradient-to-tr from-[#121212] via-[#121212] to-[#2f2f3e];
   }
   .form-input{  
-    @apply outline-none p-2 text-lg dark:placeholder:text-white font-semibold bg-transparent w-full mt-4 rounded-xl border-white/20 border-4;
+    @apply outline-none p-2 text-lg placeholder:text-white font-semibold bg-transparent w-full mt-4 rounded-xl border-white/20 border-4;
   }
   .trans{
     @apply transition-all duration-150
@@ -37,5 +38,9 @@
 
   .border-dash{
     @apply border-dashed border-white/20
+  }
+
+  .user-gradient{
+    @apply bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500;
   }
 }
