@@ -52,11 +52,6 @@ func (c *Client) readMessage() {
 			c.username = req.Payload.Username
 		}
 
-		// if err := c.connection.WriteMessage(1, []byte("Message Received")); err != nil {
-		// 	log.Println(err.Error())
-		// 	break
-		// }
-
 		for wsclients := range c.manager.clients {
 			if wsclients.room == c.room {
 				wsclients.channel <- req

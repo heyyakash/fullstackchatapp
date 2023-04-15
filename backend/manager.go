@@ -56,5 +56,13 @@ func (m *Manager) deleteClient(c *Client) {
 }
 
 func CheckOrigin(r *http.Request) bool {
-	return true
+	origin := r.Header.Get("Origin")
+	switch origin {
+	case "https://fullstackchatapp.vercel.app/":
+	case "http://localhost:3000":
+		return true
+	default:
+		return false
+	}
+	return false
 }
