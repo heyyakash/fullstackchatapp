@@ -6,7 +6,7 @@ import { uname } from './Body'
 const Chatbox = ({username,message,direction}:{username:string,message:string,direction:string}) => {
 
   return (
-    direction && 
+
     <div className={`flex float-${direction} ${direction==="right"?"":"flex-row-reverse"} gap-4 clear-both my-2 text-white`}>
       <div className={`flex flex-col ${direction==="right"?"items-end":"items-start"} gap-2`}>
         <p className="text-xl font-semibold">{username}</p>
