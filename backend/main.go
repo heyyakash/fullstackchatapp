@@ -22,5 +22,5 @@ func setupAPI() {
 	r.HandleFunc("/", test).Methods("GET")
 	r.HandleFunc("/ws/chat", m.websocketServer)
 	fmt.Println("Server Listening at 8080")
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServeTLS(":8080", "server.crt", "server.key", r))
 }
