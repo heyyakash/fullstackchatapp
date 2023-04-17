@@ -1,7 +1,5 @@
 import React from 'react'
 import NameBox from './NameBox'
-import { useAtom } from 'jotai'
-import { uname } from './Body'
 
 const Chatbox = ({username,message,direction}:{username:string,message:string,direction:string}) => {
 
