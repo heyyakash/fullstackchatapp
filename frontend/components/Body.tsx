@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import NameBox from './NameBox'
 import { RiSendPlane2Fill } from 'react-icons/ri'
 import Chatbox from './Chatbox'
-import { SendMessage, clients, connAtom, messages } from '@/pages/chat/[roomname]'
 import { atom, useAtom } from 'jotai'
 import { useRouter } from 'next/router'
+import { SendMessage } from '@/helpers/events'
+import { clients } from '@/Atoms/clientsAtom'
+import { rname, uname } from '@/Atoms/userAtom'
+import { messages } from '@/Atoms/messagesAtom'
+import { connAtom } from '@/Atoms/websocketAtom'
 
 
-export const uname = atom<string>("")
-export const rname = atom<string>("")
 
 
 const Body = () => {
@@ -30,12 +32,12 @@ const Body = () => {
     const handleExit = () => {
         setMessageList([])
         setUserList([])
+        setConn(null)
         router.push('/')
     }
 
     const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // const {username,roomname} = JSON.parse(localStorage.getItem("chat-user") as string)
         if (msg.length !== 0) {
             const payload: SendMessage = {
                 type: "send_message",
@@ -50,14 +52,12 @@ const Body = () => {
             }
             setMsg("")
         }
-
-        return false
     }
 
     return (
         <div className="flex flex-col grow relative">
-            <div className='flex p-4 absolute top-0 w-full backdrop-blur-lg bg-black/40 text-white items-center'>
-                <p className='text-2xl font-bold'>Chat</p>
+            <div className='flex p-4 py-5 absolute top-0 w-full  backdrop-blur-lg bg-black/40 text-white items-center'>
+                <p className='text-2xl font-bold'>{roomname}</p>
                 <div onClick={()=>handleExit()} className='p-2 rounded-xl ml-auto bg-red-500 cursor-pointer'>Leave</div>
             </div>
 

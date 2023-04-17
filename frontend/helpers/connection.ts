@@ -1,9 +1,14 @@
+import { useRouter } from "next/router"
+
+
 export const onOpen = () => {
     console.log("Connection Established")
 }
 
 export const onError = () => {
-    console.log("Error Occured")
+
+    const router = useRouter()
+    router.push("/")
 }
 
 

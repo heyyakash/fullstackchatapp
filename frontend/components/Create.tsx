@@ -1,16 +1,16 @@
+import { rname, uname } from '@/Atoms/userAtom'
+import { data } from '@/Types/user'
+import { useAtom } from 'jotai'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { BsFillChatLeftDotsFill } from 'react-icons/bs'
 
-export type data = {
-    username: string
-    roomname: string
-}
+
 
 const Create = () => {
     const router = useRouter()
-    const [username, setUsername] = useState<string>("")
-    const [roomname, setRoomname] = useState<string>("")
+    const [username, setUsername] = useAtom(uname)
+    const [roomname, setRoomname] = useAtom(rname)
 
     useEffect(()=>{
         localStorage.removeItem("chat-user" )
@@ -18,10 +18,12 @@ const Create = () => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
         const payload: data = {
             username,
             roomname
         }
+
         localStorage.setItem("chat-user", JSON.stringify(payload))
         router.push(`/chat/${roomname}`)
 

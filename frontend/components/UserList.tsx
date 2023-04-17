@@ -5,23 +5,22 @@ import { BsSearch } from 'react-icons/bs'
 import { BsFillCircleFill } from 'react-icons/bs'
 import NameBox from './NameBox'
 import { useAtom, useSetAtom } from 'jotai'
-import { clients, messages } from '@/pages/chat/[roomname]'
-import { data } from './Create'
-import { rname, uname } from './Body'
 import MemberBox from './MemberBox'
+import { rname, uname } from '@/Atoms/userAtom'
+import { clients } from '@/Atoms/clientsAtom'
 
 
 const UserList = () => {
-    const [username,setUsername] = useAtom(uname)
-    const [roomname,setRoomname] = useAtom(rname)
+    const [username] = useAtom(uname)
+    const [roomname] = useAtom(rname)
     const [users,setUsers] = useAtom(clients) 
     const [search,setSearch] = useState<string>("")
 
 
     return (
         <div className='hidden md:flex h-[100vh] w-[25%] bg-black/40 text-white px-6 py-4 flex-col'>
-            <div className='h-[80px] flex items-center justify-between px-2'>
-                <NameBox size="big" name={username} />
+            <div className='h-[50px] flex items-center justify-between px-2'>
+                <h2 className='text-3xl font-bold'>Chat</h2>
                 <AiTwotoneMessage className='text-3xl text-blue-500' />
             </div>
             <div className='bg-slate-400/40 rounded-xl flex flex-col p-2 mt-4'>
